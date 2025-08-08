@@ -1,36 +1,98 @@
-Spam-Sleuth AI: Spam Detection LLM
-This is a lightweight, end-to-end spam detection system that utilizes a fine-tuned Large Language Model (LLM). The project provides a complete machine learning pipeline, from data preprocessing and model fine-tuning to real-time inference. It is designed to classify incoming text as "spam" or "not spam" with high accuracy, serving as a practical example of applying modern Natural Language Processing (NLP) techniques to a real-world problem.
+# Spam-Sleuth AI: Spam Detection with LLMs
 
-Features
-Custom Fine-Tuning: The project demonstrates how to adapt a powerful, pre-trained LLM on a custom-labeled dataset to specialize in spam detection, achieving high performance for this specific task.
+Spam-Sleuth AI is a lightweight spam detection system built using a fine-tuned Large Language Model (LLM). It includes everything from data preprocessing and training to a REST API for real-time inference. The model classifies incoming text as either **spam** or **not spam**, and serves as a practical example of how to apply modern NLP techniques to a real-world problem.
 
-Text Preprocessing: A robust pipeline handles tokenization and normalization, which are crucial steps in preparing raw text data for a model to consume effectively.
+---
 
-Inference API: A simple and scalable REST API is included, allowing for real-time spam detection. This API can be integrated into other applications, such as a mail client or a messaging service.
+## Features
 
-Performance Metrics: The repository provides scripts to evaluate the model's effectiveness using key metrics like accuracy, precision, and recall, ensuring you can measure and track its performance.
+- **Custom Fine-Tuning**  
+  Fine-tune a pre-trained LLM on your own labeled dataset for accurate, task-specific spam detection.
 
-Technologies
-Python: The core programming language.
+- **Text Preprocessing Pipeline**  
+  Includes tokenization and normalization to clean and prep text data before feeding it to the model.
 
-PyTorch / TensorFlow: Leading deep learning frameworks for model development.
+- **Inference API**  
+  A simple REST API (Flask or FastAPI) for real-time spam predictions. Easily pluggable into chat apps, mail clients, etc.
 
-Hugging Face Transformers: A key library for accessing and fine-tuning state-of-the-art pre-trained LLMs.
+- **Evaluation Scripts**  
+  Measure model performance using accuracy, precision, recall, and more. Good for tracking and comparisons.
 
-Flask / FastAPI: Used to build the lightweight and efficient REST API for model inference.
+---
 
-tiktoken: A fast tokenizer that is compatible with models like GPT, used for text tokenization.
+## Tech Stack
 
-Getting Started
-Clone the repository to your local machine:
+- Python  
+- PyTorch / TensorFlow  
+- Hugging Face Transformers  
+- tiktoken  
+- Flask or FastAPI (your choice)
 
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+---
 
-Install the required Python packages:
+## Project Structure
+```
+spam-sleuth-ai/
+├── app/
+│   ├── __init__.py
+│   ├── api.py                 # REST API (Flask or FastAPI)
+│   └── inference.py           # Prediction logic using the trained model
+│
+├── data/
+│   ├── raw/                   # Raw input data (e.g. before cleaning)
+│   ├── processed/             # Cleaned/normalized data
+│   └── spam_dataset.csv       # Final labeled dataset
+│
+├── models/
+│   ├── checkpoints/           # Intermediate checkpoints (optional)
+│   └── fine_tuned_model.pt    # Final trained model
+│
+├── scripts/
+│   ├── train.py               # Fine-tune the LLM on your dataset
+│   ├── evaluate.py            # Evaluate model performance
+│   └── preprocess.py          # Data cleaning and tokenization
+│
+├── tests/
+│   └── test_inference.py      # Basic unit tests for the API/model
+│
+├── notebooks/
+│   └── exploration.ipynb      # Data exploration, EDA, or prototyping
+│
+├── requirements.txt           # Python dependencies
+├── README.md                  # Project documentation
+├── .gitignore                 # Ignore data/model/cache files
+└── config.yaml                # Configuration for training/inference
 
+```
+
+### Clone the repo
+
+```bash
+git clone https://github.com/your-username/spam-sleuth-ai.git
+cd spam-sleuth-ai
+```
+## Install dependencies
+```
 pip install -r requirements.txt
+```
+## Example API Usage
+Send a POST request to /predict:
+```
+{
+  "text": "You've won a free iPhone! Click here to claim."
+}
+```
+## Response:
+```
+{
+  "prediction": "spam"
+}
+```
+### Contributing
+If you find issues or have ideas to improve the project, feel free to open an issue or submit a PR.
+```
 
-The model is trained on a custom dataset located in the data/ directory.
+---
 
-To run the API, execute python api.py and send a request to the /predict endpoint to get a prediction.
+Let me know if you'd like a `Dockerfile`, a sample `predict()` function in the API, or help wiring up the `/predict` endpoint with FastAPI or Flask.
+```
